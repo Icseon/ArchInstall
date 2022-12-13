@@ -1,5 +1,3 @@
-echo "[ Chroot script - version 1 ]"
-
 # Ask the user for their timezone and set their timezone
 echo "What is your timezone? (Like: Europe/Amsterdam): "
 read timezone
@@ -28,12 +26,12 @@ pacman -S --noconfirm sudo
 echo "Hey, what's your name? (make sure this is all lower case)"
 read username
 
-# Set root password
+# Ask for root password
 echo "Please enter a root password (for the root user)"
 passwd
 
-# Create user and set its password as well
-adduser "$username"
+# Create user and ask for its password as well
+useradd -m $username
 echo "Please enter your password (for your user)"
 passwd "$username"
 
