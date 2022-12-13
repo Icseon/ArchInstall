@@ -60,19 +60,11 @@ echo "Grub installed successfully. Let's proceed with our own packages now! (KDE
 pacman -Syu
 
 # KDE plasma and nvidia driver
-pacman -S --noconfirm xorg plasma-desktop networkmanager konsole kate dolphin nvidia
+pacman -S --noconfirm xorg plasma-desktop networkmanager konsole kate dolphin nvidia chromium spectacle spotify
 
 # Enable required services
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
-
-# Optional: Packages I personally use, I'll make this optional so others may use this script as well
-read -p "Would you like to install Chromium, Spectacle and Spotify? (y for yes)"
-read optional
-if [[ $optional = y ]] ; then
-then
-    pacman -S --noconfirm chromium spectacle spotify
-fi
 
 clear
 rm /chroot.sh # clean up
