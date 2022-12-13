@@ -19,7 +19,7 @@ echo $hostname > /etc/hostname
 # Setup /etc/hosts
 echo "127.0.0.1		localhost" >> /etc/hosts
 echo "::1		localhost" >> /etc/hosts
-echo "127.0.1.1		$hostname.localdomain	$hostname >> /etc/hosts"
+echo "127.0.1.1		$hostname.localdomain	$hostname" >> /etc/hosts
 
 # Install sudo
 pacman -S --noconfirm sudo
