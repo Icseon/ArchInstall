@@ -1,5 +1,5 @@
 # How to obtain this script
-`curl https://arch.icseon.com -o -L install.sh`
+`curl https://arch.icseon.com -o install.sh -L`
 
 `chmod +x install.sh`
 

@@ -58,7 +58,8 @@ exit
 pacman -Syu
 
 # Ask the user for their timezone and set their timezone
-read timezone "What is your timezone? (Like: Europe/Amsterdam): "
+echo "What is your timezone? (Like: Europe/Amsterdam): "
+read timezone
 timedatectl set-timezone $timezone
 ln -sf /usr/share/zoneinfo/$timezone /etc/localtime
 hwclock --systohc
@@ -80,8 +81,11 @@ echo "127.0.1.1		$hostname.localdomain	$hostname >> /etc/hosts"
 pacman -S --noconfirm sudo
 
 # Prompt user for their password. This will be the root and user password at the same time
-read username "Hey, what's your name? (make sure this is all lower case)"
-read password "Awesome... but what will your password be?"
+echo "Hey, what's your name? (make sure this is all lower case)"
+read username
+
+echo "Awesome... but what will your password be?"
+read password
 
 # Set root password
 echo "$password" | passwd --stdin
