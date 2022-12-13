@@ -20,8 +20,10 @@ cfdisk $targetDisk
 
 # List all paritions and ask the user for the EFI and root partitions
 lsblk
-read efiPartition "Please specify your EFI partition (like: /dev/sda1): "
-read rootPartition "Please specify your root partition (like: /dev/sda2): "
+echo "Please specify your EFI partition (like: /dev/sda1): "
+read efiPartition
+echo "Please specify your root partition (like: /dev/sda2): "
+read rootPartition
 
 # Format EFI partition
 echo "Formatting EFI partition as F32 ..."
@@ -94,7 +96,8 @@ echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
 # Ask our user what the EFI partition is again - we're in a different context
 lsblk
-read efiPartition "Please specify your EFI partition (like: /dev/sda1): "
+echo "Please specify your EFI partition (like: /dev/sda1): "
+read efiPartition
 
 # Grub installation
 pacman -S --noconfirm grub efibootmgr
