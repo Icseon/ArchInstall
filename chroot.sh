@@ -28,15 +28,14 @@ pacman -S --noconfirm sudo
 echo "Hey, what's your name? (make sure this is all lower case)"
 read username
 
-echo "Awesome... but what will your password be?"
-read password
-
 # Set root password
-echo "$password" | passwd --stdin
+echo "Please enter a root password (for the root user)"
+passwd
 
 # Create user and set its password as well
 adduser "$username"
-echo "$password" | passwd "$username" --stdin
+echo "Please enter your password (for your user)"
+passwd "$username"
 
 # Add our user to the wheel group for sudo access
 usermod -aG wheel $username
