@@ -31,7 +31,7 @@ mkfs.fat -F32 $efiPartition
 
 # Format root partition
 echo "Formatting root partition as btrfs ..."
-mkfs.btrfs $rootPartition
+mkfs.btrfs $rootPartition -f
 
 # Mount root partition to /mnt
 mount $rootPartition /mnt
