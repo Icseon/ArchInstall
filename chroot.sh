@@ -13,7 +13,8 @@ echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
 
 # Handle host configuration
-read hostname "Please enter a hostname (Like: icseon-laptop)"
+echo "Please enter a hostname (Like: mato-laptop): "
+read $hostname
 echo $hostname > /etc/hostname
 
 # Setup /etc/hosts
@@ -68,7 +69,7 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
 # Optional: Packages I personally use, I'll make this optional so others may use this script as well
-read -p "Would you like to install the packages Icseon uses?"
+read -p "Would you like to install the packages Mato/Icseon uses?"
 if [[ $REPLY =~ ^[Yy]$ ]]
 then
     pacman -S --noconfirm chromium dolphin kate spectacle spotify
