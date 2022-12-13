@@ -49,5 +49,5 @@ genfstab -U /mnt >> /mnt/etc/fstab
 # We'll need to run this script under chroot, so we'll create a new file so we can do that under that context
 curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/chroot.sh -o /mnt/chroot.sh
 chmod +x /mnt/chroot.sh
-arch-chroot /mnt ./mnt/chroot.sh
+arch-chroot /mnt ./chroot.sh
 exit
