@@ -1,5 +1,4 @@
-# Update all packages
-pacman -Syu
+echo "[ Chroot script - version 1 ]"
 
 # Ask the user for their timezone and set their timezone
 echo "What is your timezone? (Like: Europe/Amsterdam): "
