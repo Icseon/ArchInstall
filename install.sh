@@ -15,7 +15,7 @@ dd if=/dev/zero of=$targetDisk bs=512 count=1 conv=notrunc
 
 # Instruct the user to create a parition of 1GB for EFI and use the remaining space for the root partition
 echo "In the next step, you'll have to create a new partition that's 1024M for the EFI partition and use the rest for your root partition"
-read -p "Press any key once you understood the next procedure"
+read -p "Press the enter key once you understood the next procedure"
 cfdisk $targetDisk
 
 # List all paritions and ask the user for the EFI and root partitions
@@ -38,7 +38,7 @@ mount $rootPartition /mnt
 
 # Let the user know that the disk setup has completed
 clear
-read -p "Disk setup has completed. The installation will begin once you press any key"
+read -p "Disk setup has completed. The installation will begin once you press the enter key"
 
 # Begin installing the required packages
 pacstrap /mnt base base-devel linux linux-firmware
