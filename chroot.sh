@@ -60,7 +60,7 @@ echo "Grub installed successfully. Let's proceed with our own packages now! (KDE
 pacman -Syu
 
 # KDE plasma and nvidia driver
-pacman -S --noconfirm xorg plasma-desktop sddm konsole kate dolphin nvidia
+pacman -S --noconfirm xorg plasma-desktop networkmanager konsole kate dolphin nvidia
 
 # Enable required services
 systemctl enable sddm.service
