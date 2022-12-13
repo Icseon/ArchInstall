@@ -1,3 +1,5 @@
+clear
+
 # Ask the user for their timezone and set their timezone
 echo "What is your timezone? (Like: Europe/Amsterdam): "
 read timezone
@@ -58,20 +60,21 @@ echo "Grub installed successfully. Let's proceed with our own packages now! (KDE
 pacman -Syu
 
 # KDE plasma and nvidia driver
-pacman -S --noconfirm xorg plasma nvidia
+pacman -S --noconfirm xorg plasma-desktop sddm konsole kate dolphin nvidia
 
 # Enable required services
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
 # Optional: Packages I personally use, I'll make this optional so others may use this script as well
-read -p "Would you like to install the packages Mato/Icseon uses?"
-if [[ $REPLY =~ ^[Yy]$ ]]
+read -p "Would you like to install Chromium, Spectacle and Spotify? (y for yes)"
+read optional
+if [[ $optional = y ]] ; then
 then
-    pacman -S --noconfirm chromium dolphin kate spectacle spotify
+    pacman -S --noconfirm chromium spectacle spotify
 fi
 
 clear
-rm /mnt/chroot.sh # clean up
+rm /chroot.sh # clean up
 read -p "We are done here. Press any key to reboot and start using Arch Linux!"
-reboot 0
+reboot now
