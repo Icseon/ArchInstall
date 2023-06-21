@@ -65,10 +65,10 @@ pacman -Syu
 pacman -S --noconfirm nvidia nvidia-settings
 
 # Plasma and its components
-pacman -S --noconfirm sddm xorg plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin
+pacman -S --noconfirm sddm xorg plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle
 
 # Fonts and emoji
-pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji spectacle
+pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
 
 # Networking
 pacman -S --noconfirm networkmanager
