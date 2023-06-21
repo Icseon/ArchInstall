@@ -14,7 +14,7 @@ echo "LANG=en_US.UTF-8" > /etc/locale.conf
 clear
 
 # Handle host configuration
-echo "Please enter a hostname (Like: mato-laptop): "
+echo "Please enter a hostname (Like: icseon-pc): "
 read hostname
 
 # Set hostname
@@ -24,8 +24,6 @@ echo $hostname > /etc/hostname
 echo "127.0.0.1		localhost" >> /etc/hosts
 echo "::1		localhost" >> /etc/hosts
 echo "127.0.1.1		$hostname.localdomain	$hostname" >> /etc/hosts
-
-# Set hostname using hostnamectl
 hostnamectl set-hostname $hostname
 
 # Install sudo
@@ -58,18 +56,38 @@ grub-install --target=x86_64-efi --bootloader-id=ArchLinux --efi-directory=/boot
 grub-mkconfig -o /boot/grub/grub.cfg
 
 clear
-echo "Grub installed successfully. Let's proceed with our own packages now! (KDE and nvidia driver)"
+echo "grub installed successfully. let's proceed with our own packages now."
 
 # Ensure we're up to date
 pacman -Syu
 
-# KDE plasma and nvidia driver as well as all applications I think I'd need
-pacman -S --noconfirm xorg plasma-desktop sddm networkmanager kwallet-pam konsole kate dolphin nvidia chromium spectacle
+# nvidia
+pacman -S --noconfirm nvidia nvidia-settings
 
-# Enable required services
+# Plasma and its components
+pacman -S --noconfirm sddm xorg plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin
+
+# Fonts and emoji
+pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji spectacle
+
+# Networking
+pacman -S --noconfirm networkmanager
+
+# Other applications I just want
+pacman -S --noconfirm chromium nano
+
+# Enable services
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
+# let's install yay, too.
+pacman -S --noconfirm git
+git clone https://aur.archlinux.org/yay.git
+cd yay
+makepkg -si
+cd ..
+rm -rf ./yay
+
 clear
 rm /chroot.sh # clean up
-read -p "Arch Linux has been installed. Reboot your computer to start using it."
+read -p "Arch Linux has been installed. Now, you just reboot. Have fun, future me."
