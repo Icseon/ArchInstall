@@ -48,9 +48,6 @@ passwd "$username"
 usermod -aG wheel $username
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
 
-# Build Projects and Scripts folder on the Desktop (my standard two directores - feel free to delete)
-mkdir /home/$username/Desktop/Projects && mkdir /home/$username/Desktop/Scripts
-
 # Grub installation
 pacman -S --noconfirm grub efibootmgr
 mkdir /boot/efi
@@ -96,7 +93,7 @@ systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
 # Configure the grub bootloader
-sed -i 's/loglevel=0 quiet/loglevel=0 quiet nvidia-drm.modeset=1/g' /etc/default/grub # kernel flag for nvidia
+sed -i 's/loglevel=3 quiet/loglevel=3 quiet nvidia-drm.modeset=1/g' /etc/default/grub # kernel flag for nvidia
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # let's not wait at all (dual booting goes through efi, not grub)
 grub-mkconfig -o /boot/grub/grub.cfg
 
