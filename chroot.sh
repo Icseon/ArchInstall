@@ -65,7 +65,7 @@ echo "grub installed successfully. let's proceed with our own packages now."
 sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
 
 # Ensure we're up to date
-pacman -Syu
+pacman -Syu --noconfirm
 
 # nvidia: fixes err:vulkan:wine_vkcreateinstance failed to create instance, res=-1
 pacman -S --noconfirm nvidia-utils lib32-nvidia-utils
