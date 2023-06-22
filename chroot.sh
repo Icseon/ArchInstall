@@ -32,21 +32,24 @@ pacman -S --noconfirm sudo
 clear
 
 # Ask for root password
-echo "Please enter a root password (for the root user)"
+echo "Enter a root password"
 passwd
 
 # Prompt user for their password. This will be the root and user password at the same time
-echo "Hey, what's your name? (make sure this is all lower case)"
+echo "What's your name? (make sure this is all lower case)"
 read username
 
 # Create user and ask for its password as well
 useradd -m $username
-echo "Please enter your password (for your user)"
+echo "Enter your password"
 passwd "$username"
 
 # Add our user to the wheel group for sudo access
 usermod -aG wheel $username
 echo "%wheel ALL=(ALL) ALL" >> /etc/sudoers
+
+# Build Projects and Scripts folder on the Desktop (my standard two directores - feel free to delete)
+mkdir /home/$username/Desktop/Projects && mkdir /home/$username/Desktop/Scripts
 
 # Grub installation
 pacman -S --noconfirm grub efibootmgr
@@ -58,14 +61,29 @@ grub-mkconfig -o /boot/grub/grub.cfg
 clear
 echo "grub installed successfully. let's proceed with our own packages now."
 
+# Enable multilib (32-bit packages eg.: wine32)
+sed -i "/\[multilib\]/,/Include/"'s/^#//' /etc/pacman.conf
+
 # Ensure we're up to date
 pacman -Syu
 
-# nvidia
+# nvidia: fixes err:vulkan:wine_vkcreateinstance failed to create instance, res=-1
+pacman -S --noconfirm nvidia-utils lib32-nvidia-utils
+
+# Applications I just want
+pacman -S --noconfirm git chromium nano wine steam
+
+# Ensure removal of lib32-amdvlk and amdvlk in case steam decides to install these (thanks pacman)
+pacman -Rs amdvlk lib32-amdvlk
+
+# nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
 # Plasma and its components
-pacman -S --noconfirm sddm xorg plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle
+pacman -S --noconfirm plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle
+
+# Display server (wayland)
+pacman -S --noconfirm --needed wayland sddm xorg plasma-wayland-session xorg-xwayland
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
@@ -73,21 +91,15 @@ pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
 # Networking
 pacman -S --noconfirm networkmanager
 
-# Other applications I just want
-pacman -S --noconfirm chromium nano
-
 # Enable services
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
 
-# let's install yay, too.
-pacman -S --noconfirm git
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
-cd ..
-rm -rf ./yay
+# Configure the grub bootloader
+sed -i 's/loglevel=0 quiet/loglevel=0 quiet nvidia-drm.modeset=1/g' /etc/default/grub # kernel flag for nvidia
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # let's not wait at all (dual booting goes through efi, not grub)
+grub-mkconfig -o /boot/grub/grub.cfg
 
 clear
-rm /chroot.sh # clean up
-read -p "Arch Linux has been installed. Now, you just reboot. Have fun, future me."
+rm /chroot.sh # clean up - we no longer require this file
+read -p "Arch Linux has been setup successfully. Now, you just reboot. Have fun, future me. :-)"
