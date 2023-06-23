@@ -11,3 +11,7 @@ I am in no way responsible for any damage caused to you, your system or your san
 
 # Note
 After installation, run post-install.sh (but not as root)
+
+# GNOME extensions
+1. https://extensions.gnome.org/extension/3628/arcmenu/
+2. https://extensions.gnome.org/extension/1160/dash-to-panel/
