@@ -8,3 +8,7 @@ This is a relatively simple script that automates the installation for Arch Linu
 
 # Warning
 I am in no way responsible for any damage caused to you, your system or your sanity. Please create a back-up before you proceed at all.
+
+# GNOME extensions
+1. https://extensions.gnome.org/extension/3628/arcmenu/
+2. https://extensions.gnome.org/extension/1160/dash-to-panel/

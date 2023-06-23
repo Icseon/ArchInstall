@@ -70,17 +70,17 @@ pacman -S --noconfirm nvidia-utils lib32-nvidia-utils
 # Applications I just want
 pacman -S --noconfirm git chromium nano wine steam
 
-# Ensure removal of lib32-amdvlk and amdvlk in case steam decides to install these (thanks pacman)
+# Ensure removal of lib32-amdvlk and amdvlk
 pacman -Rs amdvlk lib32-amdvlk
 
 # nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
-# Plasma and its components
-pacman -S --noconfirm plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle
+# GNOME
+pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
 
-# Display server (wayland)
-pacman -S --noconfirm --needed wayland sddm xorg plasma-wayland-session xorg-xwayland
+# Display server (x11 + gdm)
+pacman -S --noconfirm --needed gdm xorg
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
@@ -88,15 +88,33 @@ pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
 # Networking
 pacman -S --noconfirm networkmanager
 
-# Enable services
-systemctl enable sddm.service
-systemctl enable NetworkManager.service
+# Bluetooth
+pacman -S --noconfirm bluez bluez-utils bluedevil
+modprobe btusb
 
 # Configure the grub bootloader
 sed -i 's/loglevel=3 quiet/loglevel=3 quiet nvidia-drm.modeset=1/g' /etc/default/grub # kernel flag for nvidia
-sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # let's not wait at all (dual booting goes through efi, not grub)
+sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # remove the 5 second wait time
 grub-mkconfig -o /boot/grub/grub.cfg
+
+# Install yay for AUR packages we'll want to aquire
+git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --needed --noconfirm && cd .. && rm -rf ./yay
+
+# Install opentabletdriver (native wacom driver is pretty terrible)
+yay -Sy opentabletdriver --noconfirm
+systemctl --user daemon-reload && systemctl --user enable opentabletdriver --now
+echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
+sudo rmmod wacom
+
+# Install streamdeck-ui so I can use my streamdeck
+yay -Sy streamdeck-ui --noconfirm
+
+# Enable services
+systemctl enable sddm.service
+systemctl enable NetworkManager.service
+systemctl enable bluetooth.service
+systemctl enable streamdeck --user
 
 clear
 rm /chroot.sh # clean up - we no longer require this file
-read -p "Arch Linux has been setup successfully. Now, you just reboot. Have fun, future me. :-)"
+read -p "Arch Linux has been setup successfully. Reboot to continue."
