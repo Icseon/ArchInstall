@@ -9,4 +9,5 @@ This is a relatively simple script that automates the installation for Arch Linu
 # Warning
 I am in no way responsible for any damage caused to you, your system or your sanity. Please create a back-up before you proceed at all.
 
-# After installation, run post-install.sh (but not as root)
+# Note
+After installation, run post-install.sh (but not as root)
