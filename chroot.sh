@@ -76,10 +76,10 @@ pacman -Rs amdvlk lib32-amdvlk
 # nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
-# GNOME
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
+# KDE Plasma
+pacman -S --noconfirm plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle
 
-# Display server (x11 + gdm)
+# Display server (x11 + gdm - not using sddm due to a rendering issue)
 pacman -S --noconfirm --needed gdm xorg
 
 # Fonts and emoji
@@ -97,23 +97,10 @@ sed -i 's/loglevel=3 quiet/loglevel=3 quiet nvidia-drm.modeset=1/g' /etc/default
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # remove the 5 second wait time
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# Install yay for AUR packages we'll want to aquire
-git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --needed --noconfirm && cd .. && rm -rf ./yay
-
-# Install opentabletdriver (native wacom driver is pretty terrible)
-yay -Sy opentabletdriver --noconfirm
-systemctl --user daemon-reload && systemctl --user enable opentabletdriver --now
-echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
-sudo rmmod wacom
-
-# Install streamdeck-ui so I can use my streamdeck
-yay -Sy streamdeck-ui --noconfirm
-
 # Enable services
-systemctl enable sddm.service
+systemctl enable gdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
-systemctl enable streamdeck --user
 
 clear
 rm /chroot.sh # clean up - we no longer require this file
