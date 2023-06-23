@@ -10,7 +10,7 @@ hwclock --systohc
 # Handle locales
 echo "en_US.UTF-8 UTF-8" >> /etc/locale.gen
 echo "LANG=en_US.UTF-8" > /etc/locale.conf
-
+locale-gen
 clear
 
 # Handle host configuration
@@ -77,10 +77,14 @@ pacman -Rs amdvlk lib32-amdvlk
 pacman -S --noconfirm nvidia nvidia-settings
 
 # GNOME
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
+pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gedit
 
 # Display server (x11 + gdm - not using sddm due to a rendering issue)
 pacman -S --noconfirm --needed gdm xorg
+
+# Wayland
+sudo pacman -S --noconfirm --needed xorg-xwayland xorg-xlsclients glfw-wayland
+sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
