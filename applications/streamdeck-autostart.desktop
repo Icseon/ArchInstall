@@ -1,0 +1,6 @@
+[Desktop Entry]
+Name=Streamdeck (autostart)
+StartupWMClass=streamdeck
+Exec=~/.local/bin/streamdeck -n
+Icon=streamdeck
+Type=Application
