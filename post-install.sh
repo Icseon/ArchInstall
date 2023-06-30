@@ -15,3 +15,6 @@ systemctl enable streamdeck --user
 
 # Show Minimize and Maximize buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
+
+# Create user directories
+xdg-user-dirs-update
