@@ -16,7 +16,7 @@ sudo udevadm trigger
 python -m pip install streamdeck-ui --user --break-system-packages
 
 # Create .desktop file for streamdeck (easy ui access)
-curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-ui.desktop -o ~/.local/share/applications/streamdeck-ui.desktop
+# curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-ui.desktop -o ~/.local/share/applications/streamdeck-ui.desktop
 
 # Install Discord and create .desktop files for Wayland and X11
 yay -Sy discord
