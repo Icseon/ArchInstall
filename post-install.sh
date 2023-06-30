@@ -20,12 +20,13 @@ curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/stre
 
 # Install Discord and create .desktop files for Wayland and X11
 yay -Sy discord
-curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-wayland.desktop -o ~/.local/share/applications/discord-wayland.desktop
+curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-wayland.desktop -o ~/.local/share/applications/discord.desktop
 curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-x11.desktop -o ~/.local/share/applications/discord-x11.desktop
 
 # Make sure Streamdeck autostarts once GNOME is initialised
 mkdir ~/.config/autostart
 curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-autostart.desktop -o ~/.config/autostart/streamdeck-autostart.desktop
+chmod +x ~/.config/autostart/streamdeck-autostart.desktop
 
 # Show Minimize and Maximize buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
