@@ -17,4 +17,5 @@ After installation, run post-install.sh (but not as root)
 2. https://extensions.gnome.org/extension/1160/dash-to-panel/
 3. https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
 
+# Preview
 ![Preview](https://raw.githubusercontent.com/Icseon/ArchInstall/main/Pasted_image.png)
