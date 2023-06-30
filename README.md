@@ -15,3 +15,4 @@ After installation, run post-install.sh (but not as root)
 # GNOME extensions
 1. https://extensions.gnome.org/extension/3628/arcmenu/
 2. https://extensions.gnome.org/extension/1160/dash-to-panel/
+3. https://extensions.gnome.org/extension/2890/tray-icons-reloaded/
