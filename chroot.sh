@@ -77,7 +77,7 @@ pacman -Rs amdvlk lib32-amdvlk
 pacman -S --noconfirm nvidia nvidia-settings
 
 # GNOME
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gedit
+pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gedit gnome-system-monitor xdg-user-dirs qt5-wayland qt6-wayland
 
 # Display server (x11 + gdm - not using sddm due to a rendering issue)
 pacman -S --noconfirm --needed gdm xorg
