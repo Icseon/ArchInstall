@@ -1,6 +1,6 @@
 [Desktop Entry]
 Name=Streamdeck (autostart)
 StartupWMClass=streamdeck
-Exec=~/.local/bin/streamdeck -n
+Exec=/home/icseon/.local/bin/streamdeck -n
 Icon=streamdeck
 Type=Application
