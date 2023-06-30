@@ -7,11 +7,25 @@ systemctl --user daemon-reload && systemctl --user enable opentabletdriver --now
 echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
 sudo rmmod wacom
 
-# Install streamdeck-ui so I can use my streamdeck
-yay -Sy streamdeck-ui --noconfirm
+# Install Streamdeck interface
+sudo pacman -S hidapi python-pip qt6-base
+python -m pip install --upgrade pip --break-system-packages
+python -m pip install setuptools --break-system-packages
+sudo sh -c 'echo "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0fd9\", TAG+=\"uaccess\"" > /etc/udev/rules.d/70-streamdeck.rules'
+sudo udevadm trigger
+python -m pip install streamdeck-ui --user --break-system-packages
 
-# Enable streamdeck service
-systemctl enable streamdeck --user
+# Create .desktop file for streamdeck (easy ui access)
+curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-ui.desktop -o ~/.local/share/applications/streamdeck-ui.desktop
+
+# Install Discord and create .desktop files for Wayland and X11
+yay -Sy discord
+curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-wayland.desktop -o ~/.local/share/applications/discord-wayland.desktop
+curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-x11.desktop -o ~/.local/share/applications/discord-x11.desktop
+
+# Make sure Streamdeck autostarts once GNOME is initialised
+mkdir ~/.config/autostart
+curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-autostart.desktop -o ~/.config/autostart/streamdeck-autostart.desktop
 
 # Show Minimize and Maximize buttons
 gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
