@@ -21,9 +21,9 @@ read hostname
 echo $hostname > /etc/hostname
 
 # Setup /etc/hosts
-echo "127.0.0.1		localhost" >> /etc/hosts
-echo "::1		localhost" >> /etc/hosts
-echo "127.0.1.1		$hostname.localdomain	$hostname" >> /etc/hosts
+echo "127.0.0.1        localhost" >> /etc/hosts
+echo "::1        localhost" >> /etc/hosts
+echo "127.0.1.1        $hostname.localdomain    $hostname" >> /etc/hosts
 hostnamectl set-hostname $hostname
 
 # Install sudo
@@ -76,15 +76,11 @@ pacman -Rs amdvlk lib32-amdvlk
 # nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
-# GNOME
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gedit
+# KDE
+pacman -S --noconfirm plasma-desktop plasma-pa kscreen kwallet-pam konsole kate dolphin spectacle 
 
-# Display server (x11 + gdm - not using sddm due to a rendering issue)
-pacman -S --noconfirm --needed gdm xorg
-
-# Wayland
-sudo pacman -S --noconfirm --needed xorg-xwayland xorg-xlsclients glfw-wayland
-sudo ln -s /dev/null /etc/udev/rules.d/61-gdm.rules
+# Display server
+pacman -S --noconfirm --needed sddm xorg
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
@@ -102,7 +98,7 @@ sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # remove the 5 seco
 grub-mkconfig -o /boot/grub/grub.cfg
 
 # Enable services
-systemctl enable gdm.service
+systemctl enable sddm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 
