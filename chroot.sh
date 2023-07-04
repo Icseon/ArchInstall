@@ -103,11 +103,6 @@ grub-mkconfig -o /boot/grub/grub.cfg
 # Enabling xorg's triple buffer will solve it.
 sed -i '$i\    Option "TripleBuffer" "true"' /usr/share/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
-It will only affect you if:
-1. You have 240hz
-2. You have a RTX 4000 series GPU
-3. Have a 5k resolution
-
 # Enable services
 systemctl enable sddm.service
 systemctl enable NetworkManager.service
