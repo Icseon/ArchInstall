@@ -77,7 +77,7 @@ pacman -Rs amdvlk lib32-amdvlk
 pacman -S --noconfirm nvidia nvidia-settings
 
 # KDE
-pacman -S --noconfirm plasma-desktop dolphin konsole kscreen kate plasma-pa
+pacman -S --noconfirm plasma-desktop dolphin konsole kscreen kate plasma-pa kwallet-pam spectacle
 
 # Display server (xorg)
 pacman -S --noconfirm --needed sddm xorg
