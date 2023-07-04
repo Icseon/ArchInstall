@@ -15,21 +15,10 @@ sudo sh -c 'echo "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0fd9\", TAG+=\"uaccess\
 sudo udevadm trigger
 python -m pip install streamdeck-ui --user --break-system-packages
 
-# Create .desktop file for streamdeck (easy ui access)
-# curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-ui.desktop -o ~/.local/share/applications/streamdeck-ui.desktop
-
-# Install Discord and create .desktop files for Wayland and X11
+# Install Discord
 yay -Sy discord
-curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-wayland.desktop -o ~/.local/share/applications/discord.desktop
-curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/discord-x11.desktop -o ~/.local/share/applications/discord-x11.desktop
 
 # Make sure Streamdeck autostarts once GNOME is initialised
 mkdir ~/.config/autostart
 curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-autostart.desktop -o ~/.config/autostart/streamdeck-autostart.desktop
 chmod +x ~/.config/autostart/streamdeck-autostart.desktop
-
-# Show Minimize and Maximize buttons
-gsettings set org.gnome.desktop.wm.preferences button-layout ":minimize,maximize,close"
-
-# Create user directories
-xdg-user-dirs-update
