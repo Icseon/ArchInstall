@@ -1,6 +1,0 @@
-[Desktop Entry]
-Name=Streamdeck (ui)
-StartupWMClass=streamdeck
-Exec=killall streamdeck || true && ~/.local/bin/streamdeck
-Icon=streamdeck
-Type=Application
