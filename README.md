@@ -11,3 +11,8 @@ I am in no way responsible for any damage caused to you, your system or your san
 
 # Note
 After installation, run post-install.sh (but not as root)
+
+# GNOME extensions
+1. https://extensions.gnome.org/extension/4470/media-controls/
+2. https://extensions.gnome.org/extension/307/dash-to-dock/
+3. https://extensions.gnome.org/extension/2890/tray-icons-reloaded/

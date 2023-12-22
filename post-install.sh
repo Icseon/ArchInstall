@@ -1,13 +1,15 @@
-# Install yay for AUR packages we'll want to aquire
+# Install yay for AUR packages we'll want to aquire.
 git clone https://aur.archlinux.org/yay.git && cd yay && makepkg -si --needed --noconfirm && cd .. && rm -rf ./yay
 
-# Install opentabletdriver (native wacom driver is pretty terrible)
+# Install opentabletdriver.
 yay -Sy opentabletdriver --noconfirm
-systemctl --user daemon-reload && systemctl --user enable opentabletdriver --now
-echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
+# systemctl --user daemon-reload && systemctl --user enable opentabletdriver --now
+# echo "blacklist wacom" | sudo tee -a /etc/modprobe.d/blacklist.conf
+sudo mkinitcpio -P
 sudo rmmod wacom
+sudo rmmod hid_uclogic
 
-# Install Streamdeck interface
+# Install Streamdeck interface.
 sudo pacman -S hidapi python-pip qt6-base
 python -m pip install --upgrade pip --break-system-packages
 python -m pip install setuptools --break-system-packages
@@ -15,10 +17,7 @@ sudo sh -c 'echo "SUBSYSTEM==\"usb\", ATTRS{idVendor}==\"0fd9\", TAG+=\"uaccess\
 sudo udevadm trigger
 python -m pip install streamdeck-ui --user --break-system-packages
 
-# Install Discord
-yay -Sy discord
-
-# Make sure Streamdeck autostarts once GNOME is initialised
+# Make sure Streamdeck autostarts once the desktop is initialised.
 mkdir ~/.config/autostart
 curl https://raw.githubusercontent.com/Icseon/ArchInstall/main/applications/streamdeck-autostart.desktop -o ~/.config/autostart/streamdeck-autostart.desktop
 chmod +x ~/.config/autostart/streamdeck-autostart.desktop

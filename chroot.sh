@@ -76,8 +76,8 @@ pacman -Rs amdvlk lib32-amdvlk
 # nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
-# KDE
-pacman -S --noconfirm plasma-desktop dolphin konsole kscreen kate plasma-pa kwallet-pam spectacle
+# GNOME Desktop
+pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
 
 # Display server (xorg)
 pacman -S --noconfirm --needed sddm xorg
@@ -97,10 +97,7 @@ sed -i 's/loglevel=3 quiet/loglevel=3 quiet nvidia-drm.modeset=1/g' /etc/default
 sed -i 's/GRUB_TIMEOUT=5/GRUB_TIMEOUT=0/g' /etc/default/grub # remove the 5 second wait time
 grub-mkconfig -o /boot/grub/grub.cfg
 
-# This will fix an issue I have been having leading up to my temporary switch to GNOME.
-# Since I found the solution, I am now switching back to KDE.
-# This issue will affect me in the following configuration: RTX 4070, 5120x1440 at 240hertz.
-# Enabling xorg's triple buffer will solve it.
+# This solves a problem with tearing. You may not need it, I do.
 sed -i '$i\    Option "TripleBuffer" "true"' /usr/share/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
 # Enable services
