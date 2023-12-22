@@ -68,7 +68,7 @@ pacman -Syu --noconfirm
 pacman -S --noconfirm nvidia-utils lib32-nvidia-utils
 
 # Applications I just want
-pacman -S --noconfirm git chromium nano wine steam
+pacman -S --noconfirm git chromium nano wine # steam
 
 # Ensure removal of lib32-amdvlk and amdvlk
 pacman -Rs amdvlk lib32-amdvlk
