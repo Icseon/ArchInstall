@@ -76,8 +76,8 @@ pacman -Rs amdvlk lib32-amdvlk
 # nvidia: driver and settings applet
 pacman -S --noconfirm nvidia nvidia-settings
 
-# GNOME Desktop
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
+# KDE Plasma... again
+pacman -S --noconfirm plasma-desktop dolphin konsole kscreen kate plasma-pa kwallet-pam spectacle
 
 # Display server (xorg)
 pacman -S --noconfirm --needed sddm xorg
