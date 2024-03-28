@@ -80,7 +80,7 @@ pacman -S --noconfirm nvidia nvidia-settings
 pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
 
 # Display server (xorg)
-pacman -S --noconfirm --needed sddm xorg
+pacman -S --noconfirm --needed gdm xorg
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
@@ -101,7 +101,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 sed -i '$i\    Option "TripleBuffer" "true"' /usr/share/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
 # Enable services
-systemctl enable sddm.service
+systemctl enable gdm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 
