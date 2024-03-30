@@ -77,10 +77,13 @@ pacman -Rs amdvlk lib32-amdvlk
 pacman -S --noconfirm nvidia nvidia-settings
 
 # GNOME Desktop
-pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
+#pacman -S --noconfirm gnome-browser-connector gnome-shell nautilus gnome-terminal gnome-control-center gnome-screenshot gedit
+
+# KDE
+pacman -S --noconfirm plasma-desktop dolphin konsole kscreen kate plasma-pa kwallet-pam spectacle
 
 # Display server (xorg)
-pacman -S --noconfirm --needed gdm xorg
+pacman -S --noconfirm --needed sddm xorg
 
 # Fonts and emoji
 pacman -S --noconfirm noto-fonts noto-fonts-cjk noto-fonts-emoji
@@ -101,7 +104,7 @@ grub-mkconfig -o /boot/grub/grub.cfg
 sed -i '$i\    Option "TripleBuffer" "true"' /usr/share/X11/xorg.conf.d/10-nvidia-drm-outputclass.conf
 
 # Enable services
-systemctl enable gdm.service
+systemctl enable sddm.service
 systemctl enable NetworkManager.service
 systemctl enable bluetooth.service
 
